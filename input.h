@@ -26,8 +26,13 @@ static int scandouble(char *fmt, double *res)
 
 static int scanchar(char *fmt, wchar_t *res)
 {
-	setlocale(LC_ALL, "");
 	return scanf(fmt, res);
+}
+static wchar_t scanwchar(){
+	return getwchar();
+}
+static void set_locale(){
+	setlocale(LC_ALL, "");
 }
 
 static int scanstring(char *fmt, char **res)

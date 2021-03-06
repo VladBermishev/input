@@ -1,4 +1,3 @@
-
 package input
 
 // #include <stdlib.h>
@@ -10,6 +9,13 @@ import "C"
 
 import "unsafe"
 
+func SetLocale() {
+	C.set_locale()
+}
+func GetRune() (n int32) {
+	n = int32(C.scanwchar())
+	return
+}
 func Scanf(format string, a ...interface{}) (n int) {
 	var buf []byte
 	i, arg := 0, 0
@@ -44,86 +50,96 @@ func Scanf(format string, a ...interface{}) (n int) {
 
 			if spec == 'd' {
 				switch p := a[arg].(type) {
-				case *uint: {
-					buf = append(buf, ([]byte)("llu")...)
-					fmt := C.CString(string(buf))
-					var res C.ulonglong
-					n += int(C.scanuint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = uint(res)
-				}
-				case *uint8: {
-					buf = append(buf, 'l', 'l' ,'u')
-					fmt := C.CString(string(buf))
-					var res C.ulonglong
-					n += int(C.scanuint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = uint8(res)
-				}
-				case *uint16: {
-					buf = append(buf, 'l', 'l' ,'u')
-					fmt := C.CString(string(buf))
-					var res C.ulonglong
-					n += int(C.scanuint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = uint16(res)
-				}
-				case *uint32: {
-					buf = append(buf, 'l', 'l' ,'u')
-					fmt := C.CString(string(buf))
-					var res C.ulonglong
-					n += int(C.scanuint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = uint32(res)
-				}
-				case *uint64: {
-					buf = append(buf, 'l', 'l' ,'u')
-					fmt := C.CString(string(buf))
-					var res C.ulonglong
-					n += int(C.scanuint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = uint64(res)
-				}
-				case *int: {
-					buf = append(buf, 'l', 'l' ,'d')
-					fmt := C.CString(string(buf))
-					var res C.longlong
-					n += int(C.scanint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = int(res)
-				}
-				case *int8: {
-					buf = append(buf, 'l', 'l' ,'d')
-					fmt := C.CString(string(buf))
-					var res C.longlong
-					n += int(C.scanint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = int8(res)
-				}
-				case *int16: {
-					buf = append(buf, 'l', 'l' ,'d')
-					fmt := C.CString(string(buf))
-					var res C.longlong
-					n += int(C.scanint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = int16(res)
-				}
-				case *int32: {
-					buf = append(buf, 'l', 'l' ,'d')
-					fmt := C.CString(string(buf))
-					var res C.longlong
-					n += int(C.scanint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = int32(res)
-				}
-				case *int64: {
-					buf = append(buf, 'l', 'l' ,'d')
-					fmt := C.CString(string(buf))
-					var res C.longlong
-					n += int(C.scanint(fmt, &res))
-					C.free(unsafe.Pointer(fmt))
-					*p = int64(res)
-				}
+				case *uint:
+					{
+						buf = append(buf, ([]byte)("llu")...)
+						fmt := C.CString(string(buf))
+						var res C.ulonglong
+						n += int(C.scanuint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = uint(res)
+					}
+				case *uint8:
+					{
+						buf = append(buf, 'l', 'l', 'u')
+						fmt := C.CString(string(buf))
+						var res C.ulonglong
+						n += int(C.scanuint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = uint8(res)
+					}
+				case *uint16:
+					{
+						buf = append(buf, 'l', 'l', 'u')
+						fmt := C.CString(string(buf))
+						var res C.ulonglong
+						n += int(C.scanuint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = uint16(res)
+					}
+				case *uint32:
+					{
+						buf = append(buf, 'l', 'l', 'u')
+						fmt := C.CString(string(buf))
+						var res C.ulonglong
+						n += int(C.scanuint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = uint32(res)
+					}
+				case *uint64:
+					{
+						buf = append(buf, 'l', 'l', 'u')
+						fmt := C.CString(string(buf))
+						var res C.ulonglong
+						n += int(C.scanuint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = uint64(res)
+					}
+				case *int:
+					{
+						buf = append(buf, 'l', 'l', 'd')
+						fmt := C.CString(string(buf))
+						var res C.longlong
+						n += int(C.scanint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = int(res)
+					}
+				case *int8:
+					{
+						buf = append(buf, 'l', 'l', 'd')
+						fmt := C.CString(string(buf))
+						var res C.longlong
+						n += int(C.scanint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = int8(res)
+					}
+				case *int16:
+					{
+						buf = append(buf, 'l', 'l', 'd')
+						fmt := C.CString(string(buf))
+						var res C.longlong
+						n += int(C.scanint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = int16(res)
+					}
+				case *int32:
+					{
+						buf = append(buf, 'l', 'l', 'd')
+						fmt := C.CString(string(buf))
+						var res C.longlong
+						n += int(C.scanint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = int32(res)
+					}
+				case *int64:
+					{
+						buf = append(buf, 'l', 'l', 'd')
+						fmt := C.CString(string(buf))
+						var res C.longlong
+						n += int(C.scanint(fmt, &res))
+						C.free(unsafe.Pointer(fmt))
+						*p = int64(res)
+					}
 				default:
 					panic("input.Scanf: argument must be pointer to some integer variable")
 				}
@@ -137,16 +153,26 @@ func Scanf(format string, a ...interface{}) (n int) {
 				C.free(unsafe.Pointer(fmt))
 
 				switch p := a[arg].(type) {
-				case *uint: *p = uint(res)
-				case *uint8: *p = uint8(res)
-				case *uint16: *p = uint16(res)
-				case *uint32: *p = uint32(res)
-				case *uint64: *p = uint64(res)
-				case *int: *p = int(res)
-				case *int8: *p = int8(res)
-				case *int16: *p = int16(res)
-				case *int32: *p = int32(res)
-				case *int64: *p = int64(res)
+				case *uint:
+					*p = uint(res)
+				case *uint8:
+					*p = uint8(res)
+				case *uint16:
+					*p = uint16(res)
+				case *uint32:
+					*p = uint32(res)
+				case *uint64:
+					*p = uint64(res)
+				case *int:
+					*p = int(res)
+				case *int8:
+					*p = int8(res)
+				case *int16:
+					*p = int16(res)
+				case *int32:
+					*p = int32(res)
+				case *int64:
+					*p = int64(res)
 				default:
 					panic("input.Scanf: argument must be pointer to some integer variable")
 				}
@@ -158,10 +184,12 @@ func Scanf(format string, a ...interface{}) (n int) {
 				var res C.double
 				n += int(C.scandouble(fmt, &res))
 				C.free(unsafe.Pointer(fmt))
-				
+
 				switch p := a[arg].(type) {
-				case *float32: *p = float32(res)
-				case *float64: *p = float64(res)
+				case *float32:
+					*p = float32(res)
+				case *float64:
+					*p = float64(res)
 				default:
 					panic("input.Scanf: argument must be pointer to some floating-point variable")
 				}
