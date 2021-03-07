@@ -9,6 +9,9 @@ import "C"
 
 import "unsafe"
 
+/*
+To be able read UTF-8 characters you will need to call SetLocale() before read calls.
+*/
 func SetLocale() {
 	C.set_locale()
 }
@@ -25,7 +28,7 @@ func GetRune() rune {
 
    Once  a  stream  has  an orientation, it cannot be changed and persists
    until the stream is closed.
-This means you cant use both char and wchar_t functions with single stream, so if you use __FastGetRune() you cant use rest of input's functions
+This means you cant use both char and wchar_t functions with single stream, so if you use __FastGetRune() you cant use rest of input's functions.
 */
 func __FastGetRune() rune {
 	return int32(C.legshooting__scanwchar())
