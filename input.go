@@ -28,9 +28,9 @@ func GetRune() rune {
 
    Once  a  stream  has  an orientation, it cannot be changed and persists
    until the stream is closed.
-This means you cant use both char and wchar_t functions with single stream, so if you use __FastGetRune() you cant use rest of input's functions.
+This means you cant use both char and wchar_t functions with single stream, so if you use FastGetRune() you cant use rest of input's functions.
 */
-func __FastGetRune() rune {
+func FastGetRune() rune {
 	return int32(C.legshooting__scanwchar())
 }
 func Scanf(format string, a ...interface{}) (n int) {
