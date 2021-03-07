@@ -12,9 +12,11 @@ import "unsafe"
 func SetLocale() {
 	C.set_locale()
 }
-func GetRune() (n int32) {
-	n = int32(C.scanwchar())
-	return
+func GetRune() rune {
+	return int32(C.scanwchar())
+}
+func __FastGetRune() rune {
+	return int32(C.legshooting__scanwchar())
 }
 func Scanf(format string, a ...interface{}) (n int) {
 	var buf []byte

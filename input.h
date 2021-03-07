@@ -29,6 +29,11 @@ static int scanchar(char *fmt, wchar_t *res)
 	return scanf(fmt, res);
 }
 static wchar_t scanwchar(){
+	wchar_t res;
+	scanf("%lc",&res);
+	return res;
+}
+static wchar_t legshooting__scanwchar(){
 	return getwchar();
 }
 static void set_locale(){
