@@ -68,6 +68,7 @@
 
 	func main() {
 		var m, n int
+		input.SetLocale()
 		input.Scanf("%d%d", &m, &n)
 
 		input.Scanf("\n") // Чтобы считать \n, оставшийся после Scanf
