@@ -15,8 +15,11 @@ To be able read UTF-8 characters you will need to call SetLocale() before read c
 func SetLocale() {
 	C.set_locale()
 }
-func GetRune() rune {
-	return int32(C.scanwchar())
+func GetRune(p *rune) (n int) {
+	var res C.wchar_t
+	n += int(C.scanwchar(&res))
+	*p = int32(res)
+	return
 }
 
 /*
